@@ -1,0 +1,13 @@
+# Python関連のファイル
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 仮想環境
+venv/
+env/
+ENV/
+
+# その他の一時ファイルやログ
+*.log
+.DS_Store

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイムカード情報処理</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>タイムカード情報処理</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        <h2>タイムカードの写真をアップロードしてください</h2>
+        <div class="file-upload">
+            <label for="month">月を選択：</label>
+            <select id="month" name="month" required>
+                <option value="">月を選択してください</option>
+                <option value="01">1月</option>
+                <option value="02">2月</option>
+                <option value="03">3月</option>
+                <option value="04">4月</option>
+                <option value="05">5月</option>
+                <option value="06">6月</option>
+                <option value="07">7月</option>
+                <option value="08">8月</option>
+                <option value="09">9月</option>
+                <option value="10">10月</option>
+                <option value="11">11月</option>
+                <option value="12">12月</option>
+            </select>
+        </div>
+        <div class="file-upload">
+            <label for="file1">前半の写真：</label>
+            <input type="file" id="file1" name="file1" accept="image/*" required>
+        </div>
+        <div class="file-upload">
+            <label for="file2">後半の写真：</label>
+            <input type="file" id="file2" name="file2" accept="image/*" required>
+        </div>
+        <input type="submit" value="アップロードして処理">
+    </form>
+
+    <div id="result-container" style="display: none;">
+        <div id="image-previews">
+            <img id="processed-image1" src="" alt="処理済み画像1">
+            <img id="processed-image2" src="" alt="処理済み画像2">
+        </div>
+        
+        <div id="result-table">
+            <h2>抽出されたタイムカード情報</h2>
+            <p class="instruction">修正したのち、Excelダウンロードボタンを押してください。</p>
+            <table id="timecard-table">
+                <thead>
+                    <tr>
+                        <th>日付</th>
+                        <th>出勤時間</th>
+                        <th>退勤時間</th>
+                        <th>備考</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="download-excel">Excelファイルをダウンロード</button>
+        </div>
+    </div>
+
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    {% if success %}
+        <p class="success">{{ success }}</p>
+    {% endif %}
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
